@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { Loader } from '@googlemaps/js-api-loader';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Link from 'next/link';
@@ -22,7 +22,6 @@ interface Listing {
 
 export default function ListingDetailsPage() {
   const params = useParams();
-  const router = useRouter();
   const [listing, setListing] = useState<Listing | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -45,6 +44,7 @@ export default function ListingDetailsPage() {
     if (listing && listing.lat && listing.lng) {
       initMap();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listing]);
 
   const fetchListing = async (id: string) => {

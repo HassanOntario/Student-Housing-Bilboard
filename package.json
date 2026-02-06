@@ -1,0 +1,30 @@
+{
+  "name": "sesa-student-housing",
+  "version": "1.0.0",
+  "description": "SESA Student Housing Billboard – a modern Next.js app for browsing verified student housing listings near campus.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' lib/seed.ts"
+  },
+  "dependencies": {
+    "@react-google-maps/api": "^2.19.0",
+    "firebase": "^10.12.0",
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "dotenv": "^17.2.4",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.4.0"
+  }
+}

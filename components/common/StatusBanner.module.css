@@ -1,0 +1,32 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.pending {
+  background: #fff8e1;
+  color: #8d6e00;
+  border: 1px solid #ffe082;
+}
+
+.approved {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.rejected {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}

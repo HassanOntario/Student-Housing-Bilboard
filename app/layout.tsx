@@ -3,9 +3,9 @@ import { AuthProvider } from '@/hooks/useAuth';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'SESA Student Housing Billboard',
+  title: 'uOttawa Student Housing',
   description:
-    'Browse verified student housing listings near Western University.',
+    'Browse verified student housing listings near the University of Ottawa.',
 };
 
 export default function RootLayout({

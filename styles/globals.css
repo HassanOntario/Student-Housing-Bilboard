@@ -1,29 +1,125 @@
-/* ─── CSS Custom Properties ────────────────────────────────── */
+/* ── Fonts ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+
+/* ── Reset & Base ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h3 {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+h4 {
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+label {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ── Design Tokens ───────────────────────────────────── */
 :root {
-  /* Colours – purple / gold university-inspired palette */
-  --color-primary: #4f2d7f;
-  --color-primary-light: #6b45a1;
-  --color-primary-dark: #371f5c;
-  --color-accent: #f5a623;
-  --color-accent-light: #ffc857;
-
-  --color-bg: #f8f9fb;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f0f0f5;
-  --color-border: #e0e0e6;
-
-  --color-text: #1a1a2e;
-  --color-text-secondary: #5a5a72;
-  --color-text-muted: #8e8ea0;
-
-  --color-success: #27ae60;
-  --color-warning: #f39c12;
-  --color-danger: #e74c3c;
-
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif;
-  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Helvetica Neue', 'Helvetica', 'Work Sans', -apple-system, sans-serif;
+
+  /* uOttawa Official Brand Colors */
+  --uottawa-garnet: #9c1c30;
+  --uottawa-garnet-dark: #8a1929;
+  --uottawa-charcoal: #3a3a37;
+  --uottawa-polar-grey: #f2f2f2;
+  --uottawa-warm-grey-1: #80746c;
+  --uottawa-warm-grey-2: #908681;
+
+  /* Colors – Primary (mapped from uOttawa brand) */
+  --color-primary: var(--uottawa-garnet);
+  --color-primary-dark: var(--uottawa-garnet-dark);
+  --color-primary-foreground: #ffffff;
+
+  /* Colors – Surfaces */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-alt: var(--uottawa-polar-grey);
+
+  /* Colors – Text */
+  --color-text: var(--uottawa-charcoal);
+  --color-text-secondary: var(--uottawa-warm-grey-1);
+  --color-text-muted: var(--uottawa-warm-grey-2);
+
+  /* Colors – Semantic */
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+
+  /* Colors – Border */
+  --color-border: var(--uottawa-warm-grey-2);
 
   /* Spacing */
   --space-xs: 4px;
@@ -34,107 +130,66 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
 
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* Layout */
+  --max-width: 1280px;
+  --header-height: 64px;
+
+  /* Border-radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-
-  /* Layout */
-  --max-width: 1200px;
-  --header-height: 64px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ─── Reset ────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: var(--font-sans);
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.6;
-  min-height: 100dvh;
-}
-
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-img {
-  max-width: 100%;
+/* ── Utility Classes ─────────────────────────────────── */
+.label {
   display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--color-text);
 }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 1rem;
-}
-
-/* ─── Utility classes ──────────────────────────────────────── */
-.container {
+.input {
   width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(156, 28, 48, 0.15);
 }
 
-/* ─── Buttons ──────────────────────────────────────────────── */
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: 8px;
   padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-weight: 500;
   font-size: 0.95rem;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
   border: none;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.btn:active {
-  transform: scale(0.97);
+  text-decoration: none;
 }
 
 .btn-primary {
@@ -143,26 +198,17 @@ textarea {
 }
 
 .btn-primary:hover {
-  background: var(--color-primary-light);
+  background: var(--color-primary-dark);
 }
 
 .btn-secondary {
-  background: var(--color-surface);
-  color: var(--color-primary);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
   border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background: var(--color-surface-alt);
-}
-
-.btn-danger {
-  background: var(--color-danger);
-  color: #fff;
-}
-
-.btn-danger:hover {
-  background: #c0392b;
+  background: #e8e8e8;
 }
 
 .btn-success {
@@ -171,35 +217,19 @@ textarea {
 }
 
 .btn-success:hover {
-  background: #219150;
+  background: #15803d;
 }
 
-/* ─── Form elements ────────────────────────────────────────── */
-.input {
-  width: 100%;
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text);
-  transition: border-color 0.2s;
+.btn-danger {
+  background: var(--color-danger);
+  color: #fff;
 }
 
-.input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(79, 45, 127, 0.15);
-}
-
-.label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: var(--space-xs);
-  color: var(--color-text);
+.btn-danger:hover {
+  background: #b91c1c;
 }
 
 .error-text {
   color: var(--color-danger);
-  font-size: 0.85rem;
-  margin-top: var(--space-xs);
+  font-size: 0.9rem;
 }

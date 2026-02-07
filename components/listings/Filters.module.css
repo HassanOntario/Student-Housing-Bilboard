@@ -4,14 +4,15 @@
   gap: var(--space-lg);
   padding: var(--space-lg);
   background: var(--color-surface);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
 }
 
 .title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--uottawa-charcoal);
 }
 
 .group {

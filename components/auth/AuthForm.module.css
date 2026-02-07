@@ -10,12 +10,12 @@
   font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
-  color: var(--color-primary);
+  color: var(--uottawa-charcoal);
 }
 
 .subtitle {
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--uottawa-warm-grey-1);
   font-size: 0.95rem;
   margin-top: calc(-1 * var(--space-sm));
 }
@@ -35,7 +35,7 @@
 .toggle {
   text-align: center;
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
+  color: var(--uottawa-warm-grey-1);
 }
 
 .toggle button {

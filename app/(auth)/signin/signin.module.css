@@ -4,7 +4,7 @@
   justify-content: center;
   min-height: 100dvh;
   padding: var(--space-lg);
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  background: linear-gradient(135deg, var(--uottawa-garnet-dark, #8a1929) 0%, var(--color-primary) 100%);
 }
 
 .card {

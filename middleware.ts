@@ -1,10 +1,18 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Set to true to bypass auth during development
+const DEV_BYPASS_AUTH = process.env.NEXT_PUBLIC_DEV_BYPASS_AUTH === 'true';
+
 // Routes that do NOT require authentication
 const publicPaths = ['/signin', '/register'];
 
 export function middleware(request: NextRequest) {
+  // Skip all auth checks when bypass is enabled
+  if (DEV_BYPASS_AUTH) {
+    return NextResponse.next();
+  }
+
   const { pathname } = request.nextUrl;
 
   // Allow public routes and static assets

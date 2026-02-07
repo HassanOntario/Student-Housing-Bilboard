@@ -60,8 +60,8 @@ export default function AuthForm() {
       </h1>
       <p className={styles.subtitle}>
         {isSignUp
-          ? 'Sign up with your @uwo.ca email'
-          : 'Sign in to browse student housing'}
+          ? 'Sign up with your @uOttawa.ca email'
+          : 'Sign in to access student housing'}
       </p>
 
       {displayError && <div className={styles.error}>{displayError}</div>}
@@ -74,7 +74,7 @@ export default function AuthForm() {
           id="email"
           className="input"
           type="email"
-          placeholder="you@uwo.ca"
+          placeholder="you@uOttawa.ca"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

@@ -1,16 +1,16 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import type { ListingFilters, ListingType, ResidenceArea } from '@/types';
+import type { ResidenceFilters, ResidenceStyle } from '@/types';
 import styles from './Filters.module.css';
 
 interface FiltersProps {
-  filters: ListingFilters;
-  onChange: (filters: ListingFilters) => void;
+  filters: ResidenceFilters;
+  onChange: (filters: ResidenceFilters) => void;
 }
 
 export default function Filters({ filters, onChange }: FiltersProps) {
-  const [local, setLocal] = useState<ListingFilters>(filters);
+  const [local, setLocal] = useState<ResidenceFilters>(filters);
 
   const apply = (e?: FormEvent) => {
     e?.preventDefault();
@@ -18,7 +18,7 @@ export default function Filters({ filters, onChange }: FiltersProps) {
   };
 
   const reset = () => {
-    const cleared: ListingFilters = {};
+    const cleared: ResidenceFilters = {};
     setLocal(cleared);
     onChange(cleared);
   };
@@ -36,55 +36,31 @@ export default function Filters({ filters, onChange }: FiltersProps) {
           id="filter-search"
           className="input"
           type="text"
-          placeholder="Address, title…"
+          placeholder="Name, description…"
           value={local.search ?? ''}
           onChange={(e) => setLocal({ ...local, search: e.target.value })}
         />
       </div>
 
-      {/* Type */}
+      {/* Residence Style */}
       <div className={styles.group}>
-        <label className="label" htmlFor="filter-type">
-          Type
+        <label className="label" htmlFor="filter-style">
+          Residence Style
         </label>
         <select
-          id="filter-type"
+          id="filter-style"
           className="input"
-          value={local.type ?? ''}
+          value={local.style ?? ''}
           onChange={(e) =>
-            setLocal({ ...local, type: e.target.value as ListingType | '' })
+            setLocal({ ...local, style: (e.target.value as ResidenceStyle) || '' })
           }
         >
-          <option value="">All types</option>
-          <option value="room">Room</option>
-          <option value="apartment">Apartment</option>
-          <option value="house">House</option>
+          <option value="">All styles</option>
+          <option value="traditional">Traditional</option>
+          <option value="traditional-plus">Traditional Plus</option>
+          <option value="suite">Suite</option>
           <option value="studio">Studio</option>
-        </select>
-      </div>
-
-      {/* Residence Area */}
-      <div className={styles.group}>
-        <label className="label" htmlFor="filter-area">
-          Location
-        </label>
-        <select
-          id="filter-area"
-          className="input"
-          value={local.residenceArea ?? ''}
-          onChange={(e) =>
-            setLocal({
-              ...local,
-              residenceArea: e.target.value as ResidenceArea | '',
-            })
-          }
-        >
-          <option value="">All locations</option>
-          <option value="near-campus">Near Campus</option>
-          <option value="downtown">Downtown</option>
-          <option value="old-north">Old North</option>
-          <option value="masonville">Masonville</option>
-          <option value="other">Other</option>
+          <option value="apartment">Apartment</option>
         </select>
       </div>
 
@@ -119,27 +95,6 @@ export default function Filters({ filters, onChange }: FiltersProps) {
             }
           />
         </div>
-      </div>
-
-      {/* Bedrooms */}
-      <div className={styles.group}>
-        <label className="label" htmlFor="filter-bedrooms">
-          Bedrooms (min)
-        </label>
-        <input
-          id="filter-bedrooms"
-          className="input"
-          type="number"
-          placeholder="Any"
-          min={0}
-          value={local.bedrooms ?? ''}
-          onChange={(e) =>
-            setLocal({
-              ...local,
-              bedrooms: e.target.value ? Number(e.target.value) : undefined,
-            })
-          }
-        />
       </div>
 
       {/* Actions */}

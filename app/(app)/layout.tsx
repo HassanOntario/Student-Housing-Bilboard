@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import StatusBanner from '@/components/common/StatusBanner';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Chatbot from '@/components/chat/Chatbot';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, profile, loading, handleSignOut } = useAuth();
@@ -229,6 +230,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </footer>
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   );
 }

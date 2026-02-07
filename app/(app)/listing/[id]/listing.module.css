@@ -114,3 +114,31 @@
   color: var(--color-text-muted);
   font-size: 1.1rem;
 }
+
+.feeTable {
+  overflow-x: auto;
+  margin-top: var(--space-sm);
+}
+
+.feeTable table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.feeTable th,
+.feeTable td {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feeTable th {
+  font-weight: 600;
+  color: var(--uottawa-charcoal);
+  background: var(--color-surface-alt);
+}
+
+.feeTable td {
+  color: var(--color-text);
+}

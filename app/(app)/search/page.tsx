@@ -11,7 +11,7 @@ export default function SearchPage() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.heading}>Browse Listings</h1>
+      <h1 className={styles.heading}>Campus Residences</h1>
 
       <div className={styles.layout}>
         <Filters filters={filters} onChange={setFilters} />

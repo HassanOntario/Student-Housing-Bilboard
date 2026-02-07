@@ -1,40 +1,59 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import { getListings } from '@/lib/firestore';
-import type { Listing, ListingFilters } from '@/types';
+import { useMemo, useState } from 'react';
+import { CAMPUS_RESIDENCES } from '@/types/listing';
+import type { CampusResidence, ResidenceFilters } from '@/types';
 
-interface UseListingsReturn {
-  listings: Listing[];
-  loading: boolean;
-  error: string | null;
-  filters: ListingFilters;
-  setFilters: (filters: ListingFilters) => void;
-  refresh: () => Promise<void>;
+/** Return the cheapest total cost from the latest fee year */
+export function getCheapestMonthlyPrice(r: CampusResidence): number {
+  const latest = r.feesByYear[0];
+  if (!latest) return 0;
+  const cheapest = Math.min(...latest.fees.map((f) => f.totalCost));
+  // Fees are annual — convert to monthly
+  const months = r.agreementLength === '12-month' ? 12 : 8;
+  return Math.round(cheapest / months);
 }
 
-export function useListings(initialFilters?: ListingFilters): UseListingsReturn {
-  const [listings, setListings] = useState<Listing[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState<ListingFilters>(initialFilters ?? {});
+interface UseListingsReturn {
+  listings: CampusResidence[];
+  loading: boolean;
+  error: string | null;
+  filters: ResidenceFilters;
+  setFilters: (filters: ResidenceFilters) => void;
+}
 
-  const fetchListings = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getListings(filters);
-      setListings(data);
-    } catch (err: any) {
-      setError(err.message ?? 'Failed to load listings.');
-    } finally {
-      setLoading(false);
+export function useListings(initialFilters?: ResidenceFilters): UseListingsReturn {
+  const [filters, setFilters] = useState<ResidenceFilters>(initialFilters ?? {});
+
+  const listings = useMemo(() => {
+    let results = [...CAMPUS_RESIDENCES];
+
+    // Text search
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      results = results.filter(
+        (r) =>
+          r.name.toLowerCase().includes(q) ||
+          r.description.toLowerCase().includes(q) ||
+          r.residenceStyle.toLowerCase().includes(q),
+      );
     }
+
+    // Style filter
+    if (filters.style) {
+      results = results.filter((r) => r.residenceStyle === filters.style);
+    }
+
+    // Price filter (monthly)
+    if (filters.minPrice != null) {
+      results = results.filter((r) => getCheapestMonthlyPrice(r) >= filters.minPrice!);
+    }
+    if (filters.maxPrice != null) {
+      results = results.filter((r) => getCheapestMonthlyPrice(r) <= filters.maxPrice!);
+    }
+
+    return results;
   }, [filters]);
 
-  useEffect(() => {
-    fetchListings();
-  }, [fetchListings]);
-
-  return { listings, loading, error, filters, setFilters, refresh: fetchListings };
+  return { listings, loading: false, error: null, filters, setFilters };
 }

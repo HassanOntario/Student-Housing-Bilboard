@@ -11,7 +11,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { UserProfile, UserRegistrationData, Listing, ListingFilters } from '@/types';
+import type { UserProfile, UserRegistrationData } from '@/types';
 
 // ─── User Queries ───────────────────────────────────────────
 
@@ -89,65 +89,5 @@ export async function updateApprovalStatus(
 }
 
 // ─── Listing Queries ────────────────────────────────────────
-
-const LISTINGS_COLLECTION = 'listings';
-
-/**
- * Fetch all available listings with optional filters.
- */
-export async function getListings(
-  filters?: ListingFilters
-): Promise<Listing[]> {
-  let q = query(
-    collection(db, LISTINGS_COLLECTION),
-    where('available', '==', true),
-    orderBy('createdAt', 'desc')
-  );
-
-  // Firestore compound queries are limited; we do additional
-  // filtering client-side for flexibility.
-  const snap = await getDocs(q);
-  let listings = snap.docs.map(
-    (d) => ({ id: d.id, ...d.data() }) as Listing
-  );
-
-  if (filters) {
-    if (filters.type) {
-      listings = listings.filter((l) => l.type === filters.type);
-    }
-    if (filters.residenceArea) {
-      listings = listings.filter(
-        (l) => l.residenceArea === filters.residenceArea
-      );
-    }
-    if (filters.minPrice !== undefined) {
-      listings = listings.filter((l) => l.price >= filters.minPrice!);
-    }
-    if (filters.maxPrice !== undefined) {
-      listings = listings.filter((l) => l.price <= filters.maxPrice!);
-    }
-    if (filters.bedrooms !== undefined) {
-      listings = listings.filter((l) => l.bedrooms >= filters.bedrooms!);
-    }
-    if (filters.search) {
-      const s = filters.search.toLowerCase();
-      listings = listings.filter(
-        (l) =>
-          l.title.toLowerCase().includes(s) ||
-          l.address.toLowerCase().includes(s) ||
-          l.description.toLowerCase().includes(s)
-      );
-    }
-  }
-
-  return listings;
-}
-
-/**
- * Fetch a single listing by ID.
- */
-export async function getListingById(id: string): Promise<Listing | null> {
-  const snap = await getDoc(doc(db, LISTINGS_COLLECTION, id));
-  if (!snap.exists()) return null;
-  return { id: snap.id, ...snap.data() } as Listing;
-}
+// Listings are now served from the static CAMPUS_RESIDENCES
+// array in @/types/listing — no Firestore needed.

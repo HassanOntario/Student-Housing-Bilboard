@@ -1,14 +1,145 @@
-.wrapper {
-  width: 100%;
-  height: 400px;
+/* ── Layout ──────────────────────────────────────────────── */
+.container {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--space-lg);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
+}
+
+@media (max-width: 860px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Map wrapper ─────────────────────────────────────────── */
+.wrapper {
+  width: 100%;
+  min-height: 440px;
+  height: 100%;
+}
+
+@media (max-width: 860px) {
+  .wrapper {
+    min-height: 320px;
+  }
+}
+
+/* ── Controls panel ──────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  overflow-y: auto;
+  max-height: 540px;
+}
+
+.controlsHeading {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--uottawa-charcoal);
+  margin: 0;
+}
+
+.select,
+.addressInput {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.or {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Travel-mode toggles ─────────────────────────────────── */
+.modes {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.modeBtn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-sm) var(--space-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.modeBtn:hover {
+  border-color: var(--uottawa-garnet);
+  background: rgba(156, 28, 48, 0.04);
+}
+
+.modeBtnActive {
+  border-color: var(--uottawa-garnet);
+  background: rgba(156, 28, 48, 0.08);
+  box-shadow: 0 0 0 1px var(--uottawa-garnet);
+}
+
+.modeIcon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.modeLabel {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* ── Actions ─────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.actions .btn {
+  flex: 1;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: #c0392b;
+  margin: 0;
+}
+
+/* ── Distance result card ────────────────────────────────── */
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
-@media (max-width: 768px) {
-  .wrapper {
-    height: 300px;
-  }
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.resultLabel {
+  color: var(--color-text-secondary);
+}
+
+.resultRow strong {
+  color: var(--uottawa-charcoal);
 }

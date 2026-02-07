@@ -7,9 +7,9 @@ export type ResidenceStyle =
   | 'traditional-plus'
   | 'suite'
   | 'studio'
-  | 'apartment';
+  | 'apartment'; //no
 
-export type AgreementLength = '8-month' | '12-month';
+export type AgreementLength = '8-month' | '12-month'; //no
 
 export interface ResidenceFeatureChecklist {
   studioOrSingleRoom: boolean;
@@ -25,7 +25,7 @@ export interface ResidenceFeatureChecklist {
   miniFridgeSpace: boolean;
   kitchenAppliances: boolean;
   inUnitTemperatureControl: boolean;
-}
+} //reduce
 
 export interface ResidenceFurniture {
   bedSize: 'single' | 'double' | 'queen';
